@@ -1,0 +1,1146 @@
+<!doctype html>
+
+
+
+<html>
+
+
+
+<head>
+
+
+
+    <meta charset="UTF-8">
+
+
+
+    <title>Number Puzzle</title>
+
+
+
+</head>
+
+
+
+<style>
+
+
+
+  *{
+
+
+
+  padding: 0;
+
+
+
+  margin: 0;
+
+
+
+  border: 0;
+
+
+
+}
+
+
+
+body{
+
+    user-select: none;
+
+            -webkit-user-select: none; /* Safari */
+
+            -moz-user-select: none;    /* Firefox */
+
+            -ms-user-select: none;
+
+    background-color:black;
+
+}
+
+
+
+
+
+
+
+#container{
+
+
+
+  width: 500px;
+
+
+
+  height: 400px;
+
+
+
+  margin: 0 auto;
+
+
+
+  margin-top: 10px;
+
+
+
+  border-radius: 2px;
+
+
+
+}
+
+
+
+
+
+
+
+#game{
+
+
+
+  position: relative;
+
+
+
+  width: 450px;
+
+
+
+  height:450px;
+
+
+
+  border-radius:5px;
+
+
+
+  display: inline-block;
+
+
+
+  background-color:white;
+
+
+
+  box-shadow: 1px 1px 3px #3F647E;
+
+
+
+}
+
+
+
+
+
+
+
+#game div{
+
+
+
+  position: absolute;
+
+
+
+  width: 148px;
+
+
+
+  height:148px;
+
+
+
+  border-radius: 10px;
+
+
+
+  background-color: white;
+
+
+
+  color:green;
+
+ border: 1px green solid;
+
+  text-align: center;
+
+
+
+  font-family: monospace;
+
+
+
+  font-size: 10em;
+
+
+
+  font-weight: bolder;
+
+
+
+  line-height: 150px;
+
+
+
+  /*change the mouse cursor*/
+
+
+
+  cursor:pointer;
+
+
+
+  -webkit-transition:0.3s;
+
+
+
+}
+
+
+
+body{
+
+
+
+  margin: 10px;
+
+
+
+}
+
+
+
+
+
+
+
+#start,#reset{
+
+
+
+  width: 50%;
+
+
+
+  height: 60px;
+
+
+
+  background-color:blue;
+
+
+
+  border-radius: 10px;
+
+
+
+  color: white;
+
+
+
+  text-align: center;
+
+
+
+  cursor: pointer;
+
+
+
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+
+
+  font-weight: bold;
+
+
+
+font-size: 40px;
+
+
+
+}
+
+
+
+
+
+
+
+#block1{
+
+
+
+    left: 0px;
+
+
+
+}
+
+
+
+#block2{
+
+
+
+    left: 150px;
+
+
+
+}
+
+
+
+#block3{
+
+
+
+    left: 300px;
+
+
+
+}
+
+
+
+#block4{
+
+
+
+    top: 150px;
+
+
+
+}
+
+
+
+#block5{
+
+
+
+    top: 150px;
+
+
+
+    left: 150px;
+
+
+
+}
+
+
+
+#block6{
+
+
+
+    top: 150px;
+
+
+
+    left: 300px;
+
+
+
+}
+
+
+
+#block7{
+
+
+
+    top: 300px;
+
+
+
+}
+
+
+
+#block8{
+
+
+
+    left: 150px;
+
+
+
+    top: 300px;
+
+
+
+}
+
+
+
+#timeText{
+
+
+
+  margin: 10px;
+
+
+
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+
+
+  color: white;
+
+ font-size:2rem;
+
+    text-align:center;
+
+    
+
+}
+
+
+
+a, #a{
+
+
+
+  text-decoration: none;
+
+
+
+  margin: 10px;
+
+
+
+  padding: 5px;
+
+
+
+  text-align: center;
+
+
+
+  font-weight: bold;
+
+
+
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+
+
+  font-size: 25px;
+
+
+
+}
+
+
+
+</style>
+
+
+
+<body>
+
+<h3 id="timeText">Total Time: <span id="timer"></span></h3>
+
+    
+
+
+
+         
+
+
+
+        <!-- Game Board, the larger div -->
+
+
+
+        <div id="game">
+
+
+
+            <!-- 8 blocks and when click on them move() function is called -->
+
+
+
+            <div id="block1" onclick="move(1)">1</div>
+
+
+
+            <div id="block2" onclick="move(2)">2</div>
+
+
+
+            <div id="block3" onclick="move(3)">3</div>
+
+
+
+            <div id="block4" onclick="move(4)">4</div>
+
+
+
+            <div id="block5" onclick="move(5)">5</div>
+
+
+
+            <div id="block6" onclick="move(6)">6</div>
+
+
+
+            <div id="block7" onclick="move(7)">7</div>
+
+
+
+            <div id="block8" onclick="move(8)">8</div>
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+    <br> <br> <br> <br> <br> <br> 
+
+
+
+    <div id="time" style="text-align:center ;">
+
+
+       <input type="button" id="start" value="PAUSE / START" onclick="start()">
+
+
+
+       <br> <br>
+
+
+
+       <input type="button" id="reset" value="RESET" onclick="reset()">
+
+
+
+    </div>
+
+
+
+    <script>
+
+
+
+      var time = 0;
+
+var set_timer;
+
+var pause = true;
+
+var block = new Array(10);
+
+
+var block_direction = new Array(
+
+
+
+  [0],
+
+
+
+  [2,4],
+
+
+
+  [1,3,5],
+
+
+
+  [2,6],
+
+
+
+  [1,5,7],
+
+
+
+  [2,4,6,8],
+
+
+
+  [3,5,9],
+
+
+
+  [4,8],
+
+
+
+  [5,7,9],
+
+
+
+  [6,8]
+
+
+
+);
+
+
+
+
+
+
+
+var block_position = new Array(
+
+
+
+  [0],
+
+
+
+  [0,0],
+
+
+
+  [150,0],
+
+
+
+  [300,0],
+
+
+
+  [0,150],
+
+
+
+  [150,150],
+
+
+
+  [300,150],
+
+
+
+  [0,300],
+
+
+
+  [150,300],
+
+
+
+  [300,300]
+
+
+
+);
+
+
+
+
+
+
+
+//initialize d as default order
+
+
+
+//0 means no block on the location
+
+
+
+block[1] = 1;
+
+
+
+block[2] = 2;
+
+
+
+block[3] = 3;
+
+
+
+block[4] = 4;
+
+
+
+block[5] = 5;
+
+
+
+block[6] = 6;
+
+
+
+block[7] = 7;
+
+
+
+block[8] = 8;
+
+
+
+block[9] = 0;
+
+
+
+
+
+
+
+function move(id){
+
+
+
+  if(!pause){
+
+
+
+    var i = 1;
+
+
+
+    //find the location of the block in the board
+
+
+
+    for(i=1; i< 10; ++i){
+
+
+
+      if(block[i] == id){
+
+
+
+        break;
+
+
+
+      }
+
+
+
+    }
+
+
+
+    var target_dir = move_dir(i);
+
+
+
+    if(target_dir != 0){
+
+
+
+      block[i] = 0;
+
+
+
+      block[target_dir] = id;
+
+
+
+
+
+
+
+      document.getElementById("block"+id).style.left=block_position[target_dir][0]+"px";
+
+
+
+      document.getElementById("block"+id).style.top=block_position[target_dir][1]+"px";
+
+
+
+
+
+
+
+    }
+
+
+
+  }
+
+
+
+  var finish_flag=true;
+
+
+
+  for(var k=1; k<9; ++k){
+
+
+
+      if( block[k] != k){
+
+
+
+          finish_flag=false;
+
+
+
+          break;
+
+
+
+        }
+
+
+
+  }
+
+
+
+  if(finish_flag==true){
+
+
+
+      if(!pause)
+
+
+
+          start();
+
+
+
+      alert("Congratulations!!");
+
+
+
+  }
+
+
+
+}
+
+
+
+
+
+
+
+function move_dir(curr_loc){
+
+
+
+    var j = 0;
+
+
+
+    var canMove = false;
+
+
+
+    for(j=0; j<block_direction[curr_loc].length;++j){
+
+
+
+      //check if there is a block occupied in the available directions
+
+
+
+      if(block[block_direction[curr_loc][j]] == 0){
+
+
+
+        canMove = true;
+
+
+
+        break;
+
+
+
+      }
+
+
+
+    }
+
+
+
+
+
+
+
+    if(canMove == true){
+
+
+
+      return block_direction[curr_loc][j];
+
+
+
+    }
+
+
+
+    else{
+
+
+
+      return 0;
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+function timer(){
+
+
+
+  time +=1;
+
+
+
+  var min = parseInt(time/60);
+
+
+
+  var sec = time%60;
+
+
+
+  document.getElementById("timer").innerHTML = min + " min" + sec + " sec";
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+function start(){
+
+
+
+  if(pause){
+
+
+
+    document.getElementById("start").innerText = "Pause";
+
+
+
+    pause = false;
+
+
+
+    set_timer = setInterval(timer,1000); //execute the function every 1 sec
+
+
+
+
+
+
+
+  }
+
+
+
+  else{
+
+
+
+    document.getElementById("start").innerText= "Start";
+
+
+
+    pause = true;
+
+
+
+    clearInterval(set_timer);
+
+
+
+  }
+
+
+
+}
+
+
+
+function reset(){
+
+
+
+  time = 0;
+
+
+
+  random_block();
+
+
+
+  if(pause){
+
+
+
+    start();
+
+
+
+  }
+
+
+
+}
+
+
+
+
+
+
+
+function shuffle(array) {
+
+
+
+  for (var i = 9; i > 0; i--) {
+
+
+
+        var j = Math.floor(Math.random() * (i - 1)+1);
+
+
+
+        console.log('j=' + j)
+
+
+
+        var temp = array[i];
+
+
+
+        array[i] = array[j];
+
+
+
+        array[j] = temp;
+
+
+
+    }
+
+
+
+
+
+
+
+  return array;
+
+
+
+}
+
+
+
+
+
+
+
+function random_block(){
+
+
+
+  var shuffle_array = new Array(10);
+
+
+
+  var solvable = false;
+
+
+
+  var inversion = 0;
+
+
+
+  while (!solvable){
+
+
+
+    shuffle_array = shuffle(block);
+
+
+
+    inversion = 0;
+
+
+
+    for (var i = 1; i <shuffle_array.length; i++){
+
+
+
+      for(var j = 2; j < shuffle_array.length; j++){
+
+
+
+        if(shuffle_array[i] != 0 && shuffle_array[j] != 0){
+
+
+
+          if(shuffle_array[i]>shuffle_array[j]){
+
+
+
+            console.log('i=' + shuffle_array[i] + ' j=' +shuffle_array[j])
+            inversion++;
+          }
+        }
+      }
+    }
+    if(inversion%2 == 0){
+      solvable = true;
+    }
+  }
+  console.log('inversion=' + inversion)
+  console.log(shuffle_array);
+  for(var i=9; i>0; --i){
+    if(block[i]!=0){
+      document.getElementById("block"+shuffle_array[i]).style.left=block_position[i][0]+"px";
+      document.getElementById("block"+shuffle_array[i]).style.top=block_position[i][1]+"px";
+    }
+  }
+}
+window.onload=function(){
+    reset();
+  }
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+        });
+        document.addEventListener('copy', function(e) {
+            e.preventDefault();
+        });
+    </script>
+</body>
+  </html>
